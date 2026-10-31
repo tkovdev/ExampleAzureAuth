@@ -9,6 +9,8 @@ import {environment} from "../environments/environment";
 import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
 import {RoleGuard} from "./guards/role.guard";
 import {SignalrService} from "./services/signalr.service";
+import { GRAPH_CLIENT, graphClientFactory } from './providers/graph-client.provider';
+import { Client } from '@microsoft/microsoft-graph-client';
 
 @NgModule({
   declarations: [
@@ -50,6 +52,11 @@ import {SignalrService} from "./services/signalr.service";
       provide: HTTP_INTERCEPTORS,
       useClass: MsalInterceptor,
       multi: true
+    },
+    {
+      provide: Client,
+      useFactory: graphClientFactory,
+      deps: [MsalService]
     },
     MsalService,
     MsalGuard,

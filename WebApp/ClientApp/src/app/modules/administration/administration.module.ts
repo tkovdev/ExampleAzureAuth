@@ -3,15 +3,19 @@ import { CommonModule } from '@angular/common';
 
 import { AdministrationRoutingModule } from './administration-routing.module';
 import { AdministrationComponent } from './pages/administration/administration.component';
+import { DelegatedAdministrationComponent } from './pages/delegated-administration/delegated-administration.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
   declarations: [
-    AdministrationComponent
+    AdministrationComponent,
+    DelegatedAdministrationComponent
   ],
   imports: [
     CommonModule,
-    AdministrationRoutingModule
+    AdministrationRoutingModule,
+    ReactiveFormsModule
   ]
 })
 export class AdministrationModule { }

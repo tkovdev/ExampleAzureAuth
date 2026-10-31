@@ -1,0 +1,40 @@
+<div class="card">
+  <button (click)="refresh()">Refresh Lists</button>
+</div>
+<div class="card">
+  <h3>Application Users</h3>
+  <div class="list-actions">
+    <form [formGroup]="fgLookupUser" class="list-action-add-user" (ngSubmit)="addUser()">
+      <div class="form-control">
+        <select id="userDropdown" type="text" formControlName="user">
+          <option *ngFor="let userOption of userOptions" [ngValue]="userOption">{{userOption.displayName}}</option>
+        </select>
+        <label for="userDropdown">Select user to add</label>
+      </div>
+      <div class="form-control">
+        <select id="roleDropdown" type="text" formControlName="role">
+          <option *ngFor="let roleOption of roleOptions" [ngValue]="roleOption">{{roleOption.name}}</option>
+        </select>
+        <label for="roleDropdown">Select role for user</label>
+      </div>
+      <button class="btn" type="submit">add</button>
+      <button class="btn">clear</button>
+    </form>
+  </div>
+  <ul class="user-list">
+    <li class="user-list-item" *ngFor="let user of assignedUsers">
+        <div class="user-list-item-left">
+          <span class="user-list-name">{{user.displayName}}</span>
+          <div class="user-list-roles">
+            <span class="user-list-role" *ngFor="let role of getRoleNames(user)">{{role}}</span>
+          </div>
+        </div>
+        <div class="user-list-item-right">
+          <div class="user-list-actions">
+            <button class="btn">edit</button>
+            <button class="btn" (click)="removeUser(user.id)">delete</button>
+          </div>
+        </div>
+    </li>
+  </ul>
+</div>

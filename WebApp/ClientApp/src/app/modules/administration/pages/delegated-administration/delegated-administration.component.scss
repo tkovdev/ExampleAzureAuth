@@ -1,0 +1,66 @@
+.user-list {
+    list-style: none;
+}
+
+.user-list-item {
+    display: flex;
+    border-bottom: 1px solid lightgray;
+
+    justify-content: space-between;
+}
+
+.user-list-item-left, .user-list-item-right {
+    display: flex;
+    align-items: center;
+}
+
+.user-list-name {
+    font-size: 16px;
+}
+
+.user-list-roles {
+    display: flex;
+    flex-direction: column;
+}
+
+.user-list-role {
+    background-color: lightblue;
+    color: rgb(53, 132, 159);
+    padding: 0.45rem;
+    margin: 0.25rem;
+    margin-left: 1rem;
+    font-size: 12px;
+    border-radius: 15px;
+    overflow: hidden;
+}
+
+.user-list-actions {
+    display: flex;
+    flex-direction: column;
+}
+
+.btn {
+    padding: 0.5rem;
+}
+
+.list-actions {
+    display: flex;
+    justify-content: right;
+}
+
+.form-control {
+    display: flex;
+    flex-direction: column;
+
+    label {
+        font-size: 12px;
+    }
+}
+
+.list-action-add-user {
+    display: flex;
+
+    * {
+        margin: 0.15rem;
+    }
+}
