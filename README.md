@@ -48,6 +48,12 @@ and its App Registration process.
         1) AppRoleAssignments.ReadWrite.All
         2) Directory.Read.All
         3) Grant admin consent to both
+    3) Add the following Microsoft Graph API permissions as Delegated permissions for the delegated administration page:
+        1) Application.Read.All
+        2) AppRoleAssignment.ReadWrite.All
+        3) User.Read.All
+        4) Group.Read.All
+        5) Grant consent according to your tenant's consent policy.
 6) Add roles
     1) Add as many roles as the application requires, this example uses 2 (User.Default & User.Administrator).
     2) Both are "Users/Groups" roles, ensure they are enabled.
@@ -88,12 +94,21 @@ create this file within the same DIR as environment.ts (or use environment.ts) (
   AzureAd: {
     clientId: '<client_id_from_app_registration>',
     authority: 'https://login.microsoftonline.com/<directory_(tenant)_id_from_app_registration>',
-    redirectUri: 'https://localhost:4200'
+    redirectUri: 'https://localhost:4200',
+    groupId: '<object_id_of_group_whose_members_can_be_managed>',
+    enterpriseAppId: '<object_id_of_enterprise_application>'
   }
 ```
 2) Update app.module.ts:
     1) Locate `protectedResourceMap` and replace the `['https://api.exampleauth.tkov.dev/API.Read']`
     with the full URL that was created when exposing an API in step #4.i
+
+### Delegated Administration
+The delegated administration page uses Microsoft Graph directly from the Angular application with the signed-in user's delegated permissions. It lists members of the configured group, displays app roles and assignments for the Enterprise Application, and allows an administrator to assign a role to a user.
+
+The page is available at `/administration/delegated` and requires the `User.Administrator` app role. The Graph client first attempts silent token acquisition and requests consent interactively when needed. The `groupId` and `enterpriseAppId` values in the Angular environment identify the group used to list users and the Enterprise Application receiving role assignments.
+
+The current remove action deletes the app-role assignments returned by Microsoft Graph for the selected user.
 
 ## Summary
 ### Notes & Considerations
